@@ -1,21 +1,28 @@
 import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
+const port = process.env.PORT || 5100;
 
-app.listen(27017, () => {
-    console.log('Server is running');
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    console.log('MongoDb is connected');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+
+app.use(express.json());
+
+app.listen(port, () => {
+    console.log(`Server listening on port ${port}`);
       }
   );
 
 
 //   const port = process.env.PORT || 5100;
-
-//   try {
-//     await mongoose.connect(process.env.MONGO_URL);
-//     app.listen(port, () => {
-//       console.log(`server running on PORT ${port}...`);
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     process.exit(1);
-//   }
