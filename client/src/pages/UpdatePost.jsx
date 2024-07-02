@@ -22,6 +22,7 @@ const modules = {
     [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
     [{ size: [] }],
     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ 'color': [] }, { 'background': [] }],
     [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
     ['link', 'image', 'video'],
     ['clean'],
@@ -37,7 +38,7 @@ const formats = [
   'header', 'font', 'size',
   'bold', 'italic', 'underline', 'strike', 'blockquote',
   'list', 'bullet', 'indent',
-  'link', 'image', 'video', 'code-block'
+  'link', 'image', 'video', 'color', 'background', 'code-block'
 ];
 
 export const UpdatePost = () => {
@@ -56,8 +57,8 @@ export const UpdatePost = () => {
       languages: ['javascript', 'python', 'ruby', 'java', 'html', 'css'],
     });
 
-    const fetchPost = async () => {
-      try {
+    try {
+      const fetchPost = async () => {
         const res = await fetch(`/api/post/getposts?postId=${postId}`);
         const data = await res.json();
         if (!res.ok) {
@@ -65,15 +66,18 @@ export const UpdatePost = () => {
           setPublishError(data.message);
           return;
         }
-        setFormData(data.posts[0]);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
+        if (res.ok) {
+          setPublishError(null);
+          setFormData(data.posts[0]);
+        }
+      };
 
-    fetchPost();
+      fetchPost();
+    } catch (error) {
+      console.log(error.message);
+    }
   }, [postId]);
-
+  
   const handleUpdloadImage = async () => {
     try {
       if (!file) {
@@ -221,5 +225,19 @@ export const UpdatePost = () => {
         )}
       </form>
     </div>
+  );
+};
+
+export const PostContent = ({ content }) => {
+  useEffect(() => {
+    hljs.configure({ languages: ['javascript', 'python', 'ruby', 'java', 'html', 'css'] });
+    hljs.highlightAll();
+  }, []);
+
+  return (
+    <div
+      className='ql-snow'
+      dangerouslySetInnerHTML={{ __html: content }}
+    />
   );
 };

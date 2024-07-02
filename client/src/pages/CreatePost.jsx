@@ -22,6 +22,7 @@ const modules = {
     [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
     [{ size: [] }],
     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ 'color': [] }, { 'background': [] }],
     [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
     ['link', 'image', 'video'],
     ['clean'],
@@ -37,7 +38,7 @@ const formats = [
   'header', 'font', 'size',
   'bold', 'italic', 'underline', 'strike', 'blockquote',
   'list', 'bullet', 'indent',
-  'link', 'image', 'video', 'code-block'
+  'link', 'image', 'video', 'color', 'background', 'code-block'
 ];
 
 export const CreatePost = () => {
@@ -200,5 +201,20 @@ export const CreatePost = () => {
         )}
       </form>
     </div>
+  );
+};
+
+
+export const PostContent = ({ content }) => {
+  useEffect(() => {
+    hljs.configure({ languages: ['javascript', 'python', 'ruby', 'java', 'html', 'css'] });
+    hljs.highlightAll();
+  }, []);
+
+  return (
+    <div
+      className='ql-snow'
+      dangerouslySetInnerHTML={{ __html: content }}
+    />
   );
 };

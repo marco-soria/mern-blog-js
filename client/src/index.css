@@ -46,14 +46,14 @@ body {
 
 
   .ql-snow .ql-editor pre.ql-syntax {
-    background-color: #f4f4f4; /* Color de fondo para los bloques de código */
+    background-color: #252B37; /* Color de fondo para los bloques de código */
     border-radius: 5px;
     padding: 10px;
     overflow: auto;
   }
   
   .ql-snow .ql-editor code {
-    background-color: #f4f4f4;
+    background-color: #252B37;
     border-radius: 5px;
     padding: 2px 5px;
   }
