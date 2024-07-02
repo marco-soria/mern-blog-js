@@ -59,27 +59,32 @@ export const Header = () => {
         </span>
         Blog
       </Link>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}
+      >
         <TextInput
           type='text'
           placeholder='Search...'
           rightIcon={AiOutlineSearch}
-          className='hidden lg:inline'
+          className={`hidden lg:inline`}
+          required color="gray"
+          
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
-      <Button className='w-12 h-10 lg:hidden' color='gray' pill>
-        <AiOutlineSearch />
+      <Button className={`w-12 h-10 lg:hidden ${theme === 'light' ? 'bg-zinc-100' : ''}`} color='gray' pill>
+        <AiOutlineSearch 
+        
+        />
       </Button>
       <div className='flex gap-2 md:order-2'>
         <Button
-          className='w-12 h-10 hidden sm:inline'
+          className={`w-12 h-10 hidden sm:inline ${theme === 'light' ? 'bg-zinc-100' : ''}`}
           color='gray'
           pill
           onClick={() => dispatch(toggleTheme())}
         >
-          {theme === 'dark' ? <FaSun /> : <FaMoon />}
+          {theme === 'dark' ? <FaSun className='' /> : <FaMoon className='' />}
         </Button>
         {currentUser ? (
           <Dropdown
