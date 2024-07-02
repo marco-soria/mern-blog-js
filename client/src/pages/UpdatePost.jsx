@@ -1,6 +1,8 @@
 import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import 'highlight.js/styles/github.css'; // Importa los estilos de Highlight.js
+import hljs from 'highlight.js';
 import {
   getDownloadURL,
   getStorage,
@@ -14,20 +16,48 @@ import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
+// Configuración de los módulos de ReactQuill
+const modules = {
+  toolbar: [
+    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+    [{ size: [] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+    ['link', 'image', 'video'],
+    ['clean'],
+    [{ 'code-block': true }] // Permite bloques de código
+  ],
+  syntax: {
+    highlight: text => hljs.highlightAuto(text).value,
+  },
+};
+
+// Formatos permitidos en ReactQuill
+const formats = [
+  'header', 'font', 'size',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image', 'video', 'code-block'
+];
+
 export const UpdatePost = () => {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ title: '', image: '', content: '', category: '', _id: '' });
   const [publishError, setPublishError] = useState(null);
   const { postId } = useParams();
+  const { currentUser } = useSelector((state) => state.user);
 
   const navigate = useNavigate();
-    const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
-    try {
-      const fetchPost = async () => {
+    hljs.configure({
+      languages: ['javascript', 'python', 'ruby', 'java', 'html', 'css'],
+    });
+
+    const fetchPost = async () => {
+      try {
         const res = await fetch(`/api/post/getposts?postId=${postId}`);
         const data = await res.json();
         if (!res.ok) {
@@ -35,16 +65,13 @@ export const UpdatePost = () => {
           setPublishError(data.message);
           return;
         }
-        if (res.ok) {
-          setPublishError(null);
-          setFormData(data.posts[0]);
-        }
-      };
+        setFormData(data.posts[0]);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
 
-      fetchPost();
-    } catch (error) {
-      console.log(error.message);
-    }
+    fetchPost();
   }, [postId]);
 
   const handleUpdloadImage = async () => {
@@ -83,6 +110,7 @@ export const UpdatePost = () => {
       console.log(error);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -107,9 +135,10 @@ export const UpdatePost = () => {
       setPublishError('Something went wrong');
     }
   };
+
   return (
-    <div className='p-3 max-w-3xl mx-auto min-h-screen'>
-    {console.log(formData)}
+    <div className='p-3 max-w-4xl mx-auto min-h-screen'>
+      
       <h1 className='text-center text-3xl my-7 font-semibold'>Update post</h1>
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
@@ -176,6 +205,8 @@ export const UpdatePost = () => {
           placeholder='Write something...'
           className='h-72 mb-12'
           required
+          modules={modules}
+          formats={formats}
           onChange={(value) => {
             setFormData({ ...formData, content: value });
           }}
@@ -191,4 +222,4 @@ export const UpdatePost = () => {
       </form>
     </div>
   );
-}
+};

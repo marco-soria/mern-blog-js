@@ -1,6 +1,8 @@
 import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import 'highlight.js/styles/github.css'; // Importa los estilos de Highlight.js
+import hljs from 'highlight.js';
 import {
   getDownloadURL,
   getStorage,
@@ -8,11 +10,35 @@ import {
   uploadBytesResumable,
 } from 'firebase/storage';
 import { app } from '../firebase';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
+// Configuración de los módulos de ReactQuill
+const modules = {
+  toolbar: [
+    [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+    [{ size: [] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+    ['link', 'image', 'video'],
+    ['clean'],
+    [{ 'code-block': true }] // Permite bloques de código
+  ],
+  syntax: {
+    highlight: text => hljs.highlightAuto(text).value,
+  },
+};
+
+// Formatos permitidos en ReactQuill
+const formats = [
+  'header', 'font', 'size',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image', 'video', 'code-block'
+];
 
 export const CreatePost = () => {
   const [file, setFile] = useState(null);
@@ -23,6 +49,12 @@ export const CreatePost = () => {
   const { theme } = useSelector((state) => state.theme);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    hljs.configure({
+      languages: ['javascript', 'python', 'ruby', 'java', 'html', 'css'],
+    });
+  }, []);
 
   const handleUpdloadImage = async () => {
     try {
@@ -60,6 +92,7 @@ export const CreatePost = () => {
       console.log(error);
     }
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -84,8 +117,9 @@ export const CreatePost = () => {
       setPublishError('Something went wrong');
     }
   };
+
   return (
-    <div className='p-3 max-w-3xl mx-auto min-h-screen'>
+    <div className='p-3 max-w-4xl mx-auto min-h-screen'>
       <h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>
       <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-4 sm:flex-row justify-between'>
@@ -150,6 +184,8 @@ export const CreatePost = () => {
           placeholder='Write something...'
           className='h-72 mb-12'
           required
+          modules={modules}
+          formats={formats}
           onChange={(value) => {
             setFormData({ ...formData, content: value });
           }}
@@ -165,4 +201,4 @@ export const CreatePost = () => {
       </form>
     </div>
   );
-}
+};

@@ -40,24 +40,21 @@ body {
     color: red;
   }
 
-  .post-content pre {
-    background-color: rgb(30, 41, 59);
-    border: 1px solid rgb(61, 69, 83);
-    color: rgb(232, 231, 231);
-    white-space: pre-wrap;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    margin-bottom: 0.5rem;
+
+
+
+
+
+  .ql-snow .ql-editor pre.ql-syntax {
+    background-color: #f4f4f4; /* Color de fondo para los bloques de código */
+    border-radius: 5px;
+    padding: 10px;
+    overflow: auto;
   }
-   
-  .post-content code {
-    background-color: rgb(236, 236, 236);
-    padding: 0.25rem;
-    border-radius: 0.25rem;
-    font-size: 0.9rem;
+  
+  .ql-snow .ql-editor code {
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    padding: 2px 5px;
   }
-   
-  .dark .post-content code {
-    background-color: rgb(30, 41, 59);
-    border: 1px solid rgb(61, 69, 83);
-  }
+  
