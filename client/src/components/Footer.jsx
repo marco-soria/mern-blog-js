@@ -4,7 +4,7 @@ import { BsFacebook, BsInstagram, BsTwitter, BsGithub, BsDribbble } from 'react-
 
 export const Footer = () => {
   return (
-    <FooterFlowbite container className='border border-t-8 border-teal-500'>
+    <FooterFlowbite container className='border border-t-8 border-teal-500 bg-zinc-100'>
       <div className='w-full max-w-7xl mx-auto'>
         <div className='grid w-full justify-between sm:flex md:grid-cols-1'>
           <div className='mt-5'>
