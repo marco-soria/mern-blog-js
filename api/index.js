@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import helmet from 'helmet';
+
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import path from 'path';
@@ -29,7 +29,7 @@ const port = process.env.PORT || 5100;
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
-app.use(helmet());
+
 app.use(morgan('tiny'));
 
 // Static Files
