@@ -16,6 +16,8 @@ export const Header = () => {
   const { theme } = useSelector((state) => state.theme);
   const [searchTerm, setSearchTerm] = useState('');
 
+  
+
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get('searchTerm');
@@ -101,8 +103,14 @@ export const Header = () => {
               </span>
             </Dropdown.Header>
             <Link to={'/dashboard?tab=profile'}>
+            
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
+            {currentUser.isAdmin && (
+          <Link to={'/create-post'}>
+            <Dropdown.Item>Create a Post</Dropdown.Item>
+          </Link>
+        )}
             <Dropdown.Divider />
             <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
           </Dropdown>
