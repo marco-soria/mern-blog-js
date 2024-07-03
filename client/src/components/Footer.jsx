@@ -24,8 +24,9 @@ export const Footer = () => {
               <FooterFlowbite.LinkGroup col>
                 <FooterFlowbite.Link
                   href='#'
-                  target='_blank'
+                  
                   rel='noopener noreferrer'
+                  onclick={(e) => e.preventDeafult()}
                 >
                   100 JS Projects
                 </FooterFlowbite.Link>
@@ -43,8 +44,9 @@ export const Footer = () => {
               <FooterFlowbite.LinkGroup col>
                 <FooterFlowbite.Link
                   href='#'
-                  target='_blank'
+                  
                   rel='noopener noreferrer'
+                  onclick={(e) => e.preventDeafult()}
                 >
                   Github
                 </FooterFlowbite.Link>
@@ -69,10 +71,10 @@ export const Footer = () => {
           />
           <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
             <FooterFlowbite.Icon href='#' icon={BsFacebook}/>
-            <FooterFlowbite.Icon href='#' icon={BsInstagram}/>
-            <FooterFlowbite.Icon href='#' icon={BsTwitter}/>
-            <FooterFlowbite.Icon href='#' icon={BsGithub}/>
-            <FooterFlowbite.Icon href='#' icon={BsDribbble}/>
+            <FooterFlowbite.Icon href='#' icon={BsInstagram} onclick={(e) => e.preventDeafult()} />
+            <FooterFlowbite.Icon href='#' icon={BsTwitter} onclick={(e) => e.preventDeafult()}/>
+            <FooterFlowbite.Icon href='#' icon={BsGithub} onclick={(e) => e.preventDeafult()} />
+            <FooterFlowbite.Icon href='#' icon={BsDribbble} onclick={(e) => e.preventDeafult()} />
 
           </div>
         </div>
