@@ -58,3 +58,8 @@ body {
     padding: 2px 5px;
   }
   
+
+  .ql-editor .ql-code-block {
+    color: inherit !important;
+    background-color: inherit !important;
+  }
