@@ -45,7 +45,7 @@ export const UpdatePost = () => {
   const [file, setFile] = useState(null);
   const [imageUploadProgress, setImageUploadProgress] = useState(null);
   const [imageUploadError, setImageUploadError] = useState(null);
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ title: '', image: '', content: '', category: '', _id: '', createdAt: '', slug: '', updatedAt: '', userId: '', __v:'', });
   const [publishError, setPublishError] = useState(null);
   const { postId } = useParams();
   const { currentUser } = useSelector((state) => state.user);
@@ -152,15 +152,17 @@ export const UpdatePost = () => {
             required
             id='title'
             className='flex-1'
-            onChange={(e) =>
-              setFormData({ ...formData, title: e.target.value })
-            }
+            // onChange={(e) =>
+            //   setFormData({ ...formData, title: e.target.value })
+            // }
+            onChange={(e) => setFormData(formData => ({ ...formData, title: e.target.value }))}
             value={formData.title}
           />
           <Select
-            onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
-            }
+            // onChange={(e) =>
+            //   setFormData({ ...formData, category: e.target.value })
+            // }
+            onChange={(e) => setFormData(formData => ({ ...formData, category: e.target.value }))}
             value={formData.category}
           >
             <option value='uncategorized'>Select a category</option>
@@ -173,7 +175,8 @@ export const UpdatePost = () => {
           <FileInput
             type='file'
             accept='image/*'
-            onChange={(e) => setFile(e.target.files[0])}
+            // onChange={(e) => setFile(e.target.files[0])}
+            onChange={(e) => setFile(file => e.target.files[0])}
           />
           <Button
             type='button'
@@ -211,9 +214,10 @@ export const UpdatePost = () => {
           required
           modules={modules}
           formats={formats}
-          onChange={(value) => {
-            setFormData({ ...formData, content: value });
-          }}
+          // onChange={(value) => {
+          //   setFormData({ ...formData, content: value });
+          // }}
+          onChange={(value) => setFormData(formData => ({ ...formData, content: value }))}
         />
         <Button type='submit' gradientDuoTone='purpleToPink'>
           Update post
