@@ -3,63 +3,72 @@
 @tailwind utilities;
 
 body {
-    height: 100vh;
-  }
-  
-  .ql-editor {
-    font-size: 1.05rem;
-  }
-  
-  .post-content p {
-    margin-bottom: 0.5rem;
-  }
-  
-  .post-content h1 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    font-family: sans-serif;
-    margin: 1.5rem 0;
-  }
-  
-  .post-content h2 {
-    font-size: 1.4rem;
-    font-family: sans-serif;
-    margin: 1.5rem 0;
-  }
-  
-  .post-content a {
-    color: rgb(73, 149, 199);
-    text-decoration: none;
-  }
-  
-  .post-content a:hover {
-    text-decoration: underline;
-  }
-  
-  .dark .post-content a {
-    color: red;
-  }
+  height: 100vh;
+}
+ 
+.ql-editor {
+  font-size: 1.05rem;
+}
+ 
+.post-content p {
+  margin-bottom: 0.5rem;
+}
+ 
+.post-content h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: sans-serif;
+  margin: 1.5rem 0;
+}
+.post-content h2 {
+  font-size: 1.4rem;
+  font-family: sans-serif;
+  margin: 1.5rem 0;
+}
+ 
+.post-content ul li {
+  margin: 1.15rem 0;
+  margin-left: 1.3rem;
+  list-style-type: circle;
+}
+ 
+.post-content ol li {
+  margin: 1.15rem 0;
+  margin-left: 1.3rem;
+  list-style-type: decimal;
+}
+ 
+.post-content a {
+  /* light blue */
+  color: rgb(73, 149, 199);
+  text-decoration: none;
+}
+ 
+.post-content a:hover {
+  text-decoration: underline;
+}
+ 
+.post-content pre {
+  background-color: rgb(30, 41, 59);
+  border: 1px solid rgb(61, 69, 83);
+  color: rgb(232, 231, 231);
+  white-space: pre-wrap;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+ 
+.post-content code {
+  background-color: rgb(236, 236, 236);
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.9rem;
+}
+ 
+.dark .post-content code {
+  background-color: rgb(30, 41, 59);
+  border: 1px solid rgb(61, 69, 83);
+}
 
 
 
-
-
-
-  .ql-snow .ql-editor pre.ql-syntax {
-    background-color: #252B37; /* Color de fondo para los bloques de código */
-    border-radius: 5px;
-    padding: 10px;
-    overflow: auto;
-  }
-  
-  .ql-snow .ql-editor code {
-    background-color: #252B37;
-    border-radius: 5px;
-    padding: 2px 5px;
-  }
-  
-
-  .ql-editor .ql-code-block {
-    color: inherit !important;
-    background-color: inherit !important;
-  }

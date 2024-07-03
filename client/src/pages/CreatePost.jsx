@@ -1,8 +1,8 @@
 import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import 'highlight.js/styles/github.css'; // Importa los estilos de Highlight.js
-import hljs from 'highlight.js';
+// import 'highlight.js/styles/github.css'; // Importa los estilos de Highlight.js
+// import hljs from 'highlight.js';
 import {
   getDownloadURL,
   getStorage,
@@ -28,9 +28,9 @@ const modules = {
     ['clean'],
     [{ 'code-block': true }] // Permite bloques de código
   ],
-  syntax: {
-    highlight: text => hljs.highlightAuto(text).value,
-  },
+  // syntax: {
+  //   highlight: text => hljs.highlightAuto(text).value,
+  // },
 };
 
 // Formatos permitidos en ReactQuill
@@ -51,11 +51,11 @@ export const CreatePost = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    hljs.configure({
-      languages: ['javascript', 'python', 'ruby', 'java', 'html', 'css'],
-    });
-  }, []);
+  // useEffect(() => {
+  //   hljs.configure({
+  //     languages: ['javascript', 'python', 'ruby', 'java', 'html', 'css'],
+  //   });
+  // }, []);
 
   const handleUpdloadImage = async () => {
     try {
@@ -205,16 +205,3 @@ export const CreatePost = () => {
 };
 
 
-export const PostContent = ({ content }) => {
-  useEffect(() => {
-    hljs.configure({ languages: ['javascript', 'python', 'ruby', 'java', 'html', 'css'] });
-    hljs.highlightAll();
-  }, []);
-
-  return (
-    <div
-      className='ql-snow'
-      dangerouslySetInnerHTML={{ __html: content }}
-    />
-  );
-};
